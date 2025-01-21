@@ -10,6 +10,7 @@ import { useState } from "react";
 import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.action";
 
 export enum FormFieldType {
    INPUT = "input",
@@ -43,15 +44,19 @@ const PatientForm = () => {
    }: z.infer<typeof UserFormValidation>) {
       setIsLoading(true); //becuase asyncronous operation
       try {
-         // //form user object to send to the server.
-         // const userData = {name,email,phone};
-         // //send data to the server.
+         //form user object to send to the server.
+         const userData = {name,email,phone};
+         //send data to the server.
 
-         // const user = await createUser(userData);
-         // if(user){
-         //    //push to registration from
-         //    router.push(`/patients/${user.id}/register`);
-         // }
+         console.log(userData);
+         console.log("Creating user...");
+         const user = await createUser(userData);
+         console.log(user);//giving undefined
+         if(user){
+            //push to registration from
+            console.log("User created successfully");
+            router.push(`/patients/${user.id}/register`);
+         }
       } catch (error) {
          console.log(error);
       }
