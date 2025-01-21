@@ -9,6 +9,7 @@ import CustomFormFields from "./CustomFormFields";
 import { useState } from "react";
 import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
+import { useRouter } from "next/navigation";
 
 export enum FormFieldType {
    INPUT = "input",
@@ -20,10 +21,9 @@ export enum FormFieldType {
    SKELETON = "skeleton",
 }
 
-
 const PatientForm = () => {
+   const router = useRouter();
    const [isLoading, setIsLoading] = useState(false);
-
 
    // 1. Define form. (zod validation i guess)
    const form = useForm<z.infer<typeof UserFormValidation>>({
@@ -35,11 +35,26 @@ const PatientForm = () => {
       },
    });
 
-   // 2. Define on submit handler.
-   function onSubmit(values: z.infer<typeof UserFormValidation>) {
-      // Do something with the form values.
-      // ✅ This will be type-safe and validated.
-      console.log(values);
+   //submit handler.
+   async function onSubmit({
+      name,
+      email,
+      phone,
+   }: z.infer<typeof UserFormValidation>) {
+      setIsLoading(true); //becuase asyncronous operation
+      try {
+         // //form user object to send to the server.
+         // const userData = {name,email,phone};
+         // //send data to the server.
+
+         // const user = await createUser(userData);
+         // if(user){
+         //    //push to registration from
+         //    router.push(`/patients/${user.id}/register`);
+         // }
+      } catch (error) {
+         console.log(error);
+      }
    }
 
    return (
@@ -86,7 +101,10 @@ const PatientForm = () => {
                iconAlt="Phone Icon"
             />
 
-            <SubmitButton isLoading={isLoading} className='shad-primary-btn w-full'>
+            <SubmitButton
+               isLoading={isLoading}
+               className="shad-primary-btn w-full"
+            >
                Get Started
             </SubmitButton>
          </form>
