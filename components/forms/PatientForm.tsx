@@ -45,14 +45,14 @@ const PatientForm = () => {
       setIsLoading(true); //becuase asyncronous operation
       try {
          //form user object to send to the server.
-         const userData = {name,email,phone};
+         const userData = { name, email, phone };
          //send data to the server.
 
          console.log(userData);
          console.log("Creating user...");
          const user = await createUser(userData);
-         console.log(user);//giving undefined
-         if(user){
+         console.log(user); //giving undefined
+         if (user) {
             //push to registration from
             console.log("User created successfully");
             router.push(`/patients/${user.id}/register`);

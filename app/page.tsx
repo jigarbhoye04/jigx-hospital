@@ -5,7 +5,6 @@ import Link from "next/link";
 export default function Home() {
    return (
       <div className="flex h-screen max-h-screen">
-         
          {/* todo: OTP Verification | Passkey Model */}
 
          <section className="remove-scrollbar container my-auto">
@@ -34,12 +33,12 @@ export default function Home() {
          </section>
 
          <Image
-          src="/assets/images/onboarding-img.jpg"
-          height={1000}
-          width={1000}
-          alt="patient"
-          className="side-img max-w-[50%] opacity-50 fit-cover"
-        />
+            src="/assets/images/onboarding-img.jpg"
+            height={1000}
+            width={1000}
+            alt="patient"
+            className="side-img max-w-[50%] opacity-50 fit-cover"
+         />
       </div>
    );
 }
